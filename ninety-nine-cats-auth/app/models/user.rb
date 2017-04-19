@@ -4,7 +4,6 @@ class User < ActiveRecord::Base
   validates :session_token, presence: { message: "Password can't be blank"}
   validates :password, length: { minimum: 6, allow_nil: true}
   after_initialize :ensure_session_token
-  before_action :user_logged_in, only: [:new]
 
   attr_reader :password
 
