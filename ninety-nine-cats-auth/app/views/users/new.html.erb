@@ -1,0 +1,16 @@
+<h1>Register New User</h1>
+
+
+<form action="<%= users_url %>" method="post">
+  <input
+     name="authenticity_token"
+     type="hidden"
+     value="<%= form_authenticity_token %>">
+
+  <input type="text" name="user[username]" placeholder="username">
+  <input type="password" name="user[password]" placeholder="password">
+  <input type="submit" value="create_user">
+
+  <%= render partial: "shared/errors" %>
+
+</form>

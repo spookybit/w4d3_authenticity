@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
   validates :session_token, presence: { message: "Password can't be blank"}
   validates :password, length: { minimum: 6, allow_nil: true}
   after_initialize :ensure_session_token
+  before_action :user_logged_in, only: [:new]
 
   attr_reader :password
 
@@ -19,6 +20,12 @@ class User < ActiveRecord::Base
     else
       return nil
     end
+  end
+
+  def self.find_by_session_token(session_token)
+    user = User.find_by(session_token: session_token)
+    return nil if user.nil?
+    user
   end
 
   def reset_session_token!

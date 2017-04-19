@@ -8,6 +8,29 @@
 </head>
 <body>
 
+  <% if !current_user.nil? %>
+    <h1>Hi, <%=current_user.username %>!</h1>
+  <% end %>
+
+    <% user_action = current_user ? session_url : new_session_url %>
+    <% user_method = current_user ?  :delete : :get %>
+    <% user_button = current_user ?  :Logout : :Login %>
+
+
+
+    <form action=" <%= user_action %>" method="POST">
+      <input type="hidden"
+         name="authenticity_token"
+         value="<%= form_authenticity_token %>">
+
+      <input type="hidden" name="_method" value="<%= user_method %>">
+
+      <input type="submit" value="<%= user_button %>" />
+
+    </form>
+
+
+
 <%= yield %>
 
 </body>
