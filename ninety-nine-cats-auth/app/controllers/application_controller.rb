@@ -18,4 +18,5 @@ class ApplicationController < ActionController::Base
   def user_logged_in
     redirect_to cats_url if current_user
   end
+
 end
